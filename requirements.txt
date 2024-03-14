@@ -1,0 +1,7 @@
+langchain
+streamlit
+langchain-community
+pinecone-client
+openai
+tiktoken
+nest_asyncio
