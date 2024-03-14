@@ -20,3 +20,17 @@ def get_website_data(sitemap_url):
 
 
 ##### FETCH DATA FROM WEBSITE - END #####
+
+##### SPLIT DATA INTO CHUNKS - START #####
+
+def split_data(docs):
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size = 1000,
+        chunk_overlap = 200,
+        length_function = len
+    )
+    
+    docs_chunks = text_splitter.split_documents(docs)
+    return docs_chunks
+
+##### SPLIT DATA INTO CHUNKS - END #####

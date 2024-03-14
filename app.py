@@ -33,10 +33,11 @@ if load_button:
         st.write("Data pull done...")
         
         # Split data into chunks
-        get_website_data("https://jobs.excelcult.com/wp-sitemap-posts-post-1.xml")
+        site_data = get_website_data("https://jobs.excelcult.com/wp-sitemap-posts-post-1.xml")
         st.write("Splitting data done...")
         
         # Creating embeddings instace
+        split_data(site_data)
         st.write("Embeddings instance creation done...")
         
         # Push data to Pinecone
