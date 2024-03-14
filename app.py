@@ -43,6 +43,14 @@ if load_button:
         st.write("Embeddings instance creation done...")
         
         # Push data to Pinecone
+        # Dimensions utilized for Pinecone index creation: 384 - Metric: Cosine
+        push_to_pinecone(
+            st.session_data['Pinecone_API_Key'],
+            "gcp-starter",
+            "chatbot",
+            embeddings,
+            chunks_data
+        )
         st.write("Pushing data to Pinecone...")
         
         st.sidebar.success("Data pushed to Pinecone successfully!")

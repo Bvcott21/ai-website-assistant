@@ -42,3 +42,19 @@ def create_embeddings():
     return embeddings
 
 ##### CREATE EMBEDDINGS - END #####
+
+##### PUSH DATA TO PINECONE - START #####
+
+def push_to_pinecone(pinecone_api_key, pinecone_environment, 
+                    pinecone_index_name, embeddings, docs):
+    
+    pinecone.init(
+        api_key = pinecone_api_key,
+        environment = pinecone_environment    
+    )
+    index_name = pinecone_index_name
+    index = Pinecone.from_documents(docs, embeddings, index_name = index_name)
+    
+    return index
+
+##### PUSH DATA TO PINECONE - END #####
