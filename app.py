@@ -29,15 +29,17 @@ load_button = st.sidebar.button("Load data to Pinecone", key="load_button")
 if load_button:
     # Proceed only if the API Keys are provided
     if st.session_state['HuggingFace_API_Key'] != "" and st.session_state['Pinecone_API_Key'] != "": 
+        
         # Fetch data from site
+        site_data = get_website_data("https://jobs.excelcult.com/wp-sitemap-posts-post-1.xml")
         st.write("Data pull done...")
         
         # Split data into chunks
-        site_data = get_website_data("https://jobs.excelcult.com/wp-sitemap-posts-post-1.xml")
+        chunks_data = split_data(site_data)
         st.write("Splitting data done...")
         
         # Creating embeddings instace
-        split_data(site_data)
+        embeddings = create_embeddings()
         st.write("Embeddings instance creation done...")
         
         # Push data to Pinecone

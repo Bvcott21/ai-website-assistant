@@ -34,3 +34,11 @@ def split_data(docs):
     return docs_chunks
 
 ##### SPLIT DATA INTO CHUNKS - END #####
+
+##### CREATE EMBEDDINGS - START #####
+
+def create_embeddings():
+    embeddings = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
+    return embeddings
+
+##### CREATE EMBEDDINGS - END #####
