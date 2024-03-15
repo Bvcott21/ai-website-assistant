@@ -90,7 +90,12 @@ if submit:
         
         # Fetch relevant documents from Pinecone
         similar_docs = get_similar_docs(index, prompt, document_count)
-        st.write(similar_docs)
+        
+        # Displaying search result
+        for document in similar_docs:
+            st.write("**Result : " + str(similar_docs.index(document) + 1) + "**")
+            st.write("**Info**:" + document.page_content)
+            st.write("**Link**:" + document.metadata['source'])
         
         st.success("Search results: ")
 ##### CAPTURE USER INPUT - END #####
