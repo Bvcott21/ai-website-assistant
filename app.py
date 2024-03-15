@@ -1,5 +1,6 @@
 import streamlit as st
 from utils import *
+import constants
 
 # Creating session state variables
 if 'HuggingFace_API_Key' not in st.session_state:
@@ -31,7 +32,7 @@ if load_button:
     if st.session_state['HuggingFace_API_Key'] != "" and st.session_state['Pinecone_API_Key'] != "": 
         
         # Fetch data from site
-        site_data = get_website_data("https://jobs.excelcult.com/wp-sitemap-posts-post-1.xml")
+        site_data = get_website_data(constants.WEBSITE_URL)
         st.write("Data pull done...")
         
         # Split data into chunks
@@ -46,8 +47,8 @@ if load_button:
         # Dimensions utilized for Pinecone index creation: 384 - Metric: Cosine
         push_to_pinecone(
             st.session_state['Pinecone_API_Key'],
-            "gcp-starter",
-            "chatbot",
+            constants.PINECONE_ENV,
+            constants.PINECONE_INDEX,
             embeddings,
             chunks_data
         )
