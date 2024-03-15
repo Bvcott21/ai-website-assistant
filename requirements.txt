@@ -1,7 +1,8 @@
 langchain
 streamlit
 langchain-community
-pinecone-client
+pinecone-client==2.2.4
 openai
 tiktoken
 nest_asyncio
+itertools

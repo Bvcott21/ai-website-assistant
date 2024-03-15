@@ -45,7 +45,7 @@ if load_button:
         # Push data to Pinecone
         # Dimensions utilized for Pinecone index creation: 384 - Metric: Cosine
         push_to_pinecone(
-            st.session_data['Pinecone_API_Key'],
+            st.session_state['Pinecone_API_Key'],
             "gcp-starter",
             "chatbot",
             embeddings,

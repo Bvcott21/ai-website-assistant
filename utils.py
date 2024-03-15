@@ -3,6 +3,7 @@ from langchain.vectorstores import Pinecone
 from langchain.embeddings.sentence_transformer import SentenceTransformerEmbeddings
 import pinecone
 import asyncio
+import itertools
 from langchain.document_loaders.sitemap import SitemapLoader
 
 ##### FETCH DATA FROM WEBSITE - START #####
@@ -52,6 +53,7 @@ def push_to_pinecone(pinecone_api_key, pinecone_environment,
         api_key = pinecone_api_key,
         environment = pinecone_environment    
     )
+    
     index_name = pinecone_index_name
     index = Pinecone.from_documents(docs, embeddings, index_name = index_name)
     
