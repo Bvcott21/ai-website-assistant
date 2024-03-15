@@ -60,3 +60,37 @@ if load_button:
         st.sidebar.error("Please provide API Keys")
         
 ##### SIDE BAR - END #####
+
+##### CAPTURE USER INPUT - START #####
+
+prompt = st.text_input("How can I help?", key = "prompt") # The box for the text prompt
+document_count = st.slider(
+    "No. of links to return = (0 - LOW || 5 - HIGH)", 
+    0, 5, 2, 
+    step = 1
+)
+
+submit = st.button("Search")
+
+if submit:
+    # Proceed only if API Keys are provided
+    if st.session_state['HuggingFace_API_Key'] != "" and st.session_state['Pinecone_API_Key'] != "":
+        # Create embeddings instance
+        embeddings = create_embeddings()
+        st.write("Embeddings instance created")
+    
+        # Pull index data from Pinecone
+        index = pull_from_pinecone(
+            st.session_state['Pinecone_API_Key'],
+            constants.PINECONE_ENV,
+            constants.PINECONE_INDEX,
+            embeddings
+        )
+        st.write("Pinecone index retrieval")
+        
+        # Fetch relevant documents from Pinecone
+        similar_docs = get_similar_docs(index, prompt, document_count)
+        st.write(similar_docs)
+        
+        st.success("Search results: ")
+##### CAPTURE USER INPUT - END #####

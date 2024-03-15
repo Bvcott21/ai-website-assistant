@@ -47,7 +47,7 @@ def create_embeddings():
 ##### PUSH DATA TO PINECONE - START #####
 
 def push_to_pinecone(pinecone_api_key, pinecone_environment, 
-                    pinecone_index_name, embeddings, docs):
+    pinecone_index_name, embeddings, docs):
     
     pinecone.init(
         api_key = pinecone_api_key,
@@ -60,3 +60,28 @@ def push_to_pinecone(pinecone_api_key, pinecone_environment,
     return index
 
 ##### PUSH DATA TO PINECONE - END #####
+
+##### PULL DATA FROM PINECONE - START #####
+
+def pull_from_pinecone(pinecone_api_key, pinecone_environment, 
+    pinecone_index_name, embeddings):
+    
+    pinecone.init(
+        api_key = pinecone_api_key,
+        environment = pinecone_environment
+    )
+    
+    index_name = pinecone_index_name
+    
+    index = Pinecone.from_existing_index(index_name, embeddings)
+    return index
+
+##### PULL DATA FROM PINECONE - END #####
+
+##### SIMILARITY SEARCH - START #####
+
+def get_similar_docs(index, query, k = 2):
+    similar_docs = index.similarity_search(query, k = k)
+    return similar_docs
+
+##### SIMILARITY SEARCH - END #####
